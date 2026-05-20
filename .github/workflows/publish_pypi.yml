@@ -1,0 +1,133 @@
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - "v*"
+  release:
+    types:
+      - published
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-pypi-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build and check distributions
+    if: >-
+      github.repository == 'spacetelescope/rocky-worlds-data-challenge' ||
+      github.repository == 'taylorbell57/rwddt-challenge'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build twine
+
+      - name: Build source and wheel distributions
+        run: |
+          python -m build
+
+      - name: Check distribution metadata
+        run: |
+          python -m twine check dist/*
+
+      - name: Test wheel install
+        run: |
+          python -m venv test-install
+          test-install/bin/python -m pip install --upgrade pip
+          WHEEL="$(ls dist/*.whl)"
+          test-install/bin/python -m pip install "${WHEEL}[test]"
+          TEST_PYTHON="$GITHUB_WORKSPACE/test-install/bin/python"
+          cd /tmp
+          "$TEST_PYTHON" -c "import rocky_worlds_data_challenge as rw; print(rw.__version__)"
+          "$TEST_PYTHON" -m pytest --pyargs rocky_worlds_data_challenge.tests
+
+      - name: Upload distribution artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: python-package-distributions
+          path: dist/
+          if-no-files-found: error
+
+  publish-testpypi:
+    name: Publish to TestPyPI
+    if: >-
+      (
+        github.repository == 'spacetelescope/rocky-worlds-data-challenge' ||
+        github.repository == 'taylorbell57/rwddt-challenge'
+      ) &&
+      startsWith(github.ref, 'refs/tags/v') &&
+      (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/rocky-worlds-data-challenge
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Download distribution artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish package distributions to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+
+  publish-pypi:
+    name: Publish to PyPI
+    if: >-
+      github.repository == 'spacetelescope/rocky-worlds-data-challenge' &&
+      github.event_name == 'release' &&
+      github.event.action == 'published' &&
+      github.event.release.prerelease == false &&
+      startsWith(github.event.release.tag_name, 'v')
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/rocky-worlds-data-challenge
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Validate stable release tag
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+$ ]]; then
+            echo "Refusing to publish non-stable major.minor tag to PyPI: $TAG"
+            exit 1
+          fi
+
+      - name: Download distribution artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

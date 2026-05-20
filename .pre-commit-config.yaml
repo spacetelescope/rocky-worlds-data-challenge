@@ -1,0 +1,102 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-yaml
+        name: Check YAML
+        entry: check-yaml
+        language: python
+        additional_dependencies:
+          - pre-commit-hooks
+        types:
+          - yaml
+
+      - id: check-toml
+        name: Check TOML
+        entry: check-toml
+        language: python
+        additional_dependencies:
+          - pre-commit-hooks
+        types:
+          - toml
+
+      - id: check-json
+        name: Check JSON
+        entry: check-json
+        language: python
+        additional_dependencies:
+          - pre-commit-hooks
+        types:
+          - json
+
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        entry: trailing-whitespace-fixer
+        language: python
+        additional_dependencies:
+          - pre-commit-hooks
+        args:
+          - --markdown-linebreak-ext=md
+        types:
+          - text
+
+      - id: end-of-file-fixer
+        name: Fix end of files
+        entry: end-of-file-fixer
+        language: python
+        additional_dependencies:
+          - pre-commit-hooks
+        types:
+          - text
+
+      - id: check-merge-conflict
+        name: Check merge conflicts
+        entry: check-merge-conflict
+        language: python
+        additional_dependencies:
+          - pre-commit-hooks
+        types:
+          - text
+
+      - id: check-added-large-files
+        name: Check added large files
+        entry: check-added-large-files
+        language: python
+        additional_dependencies:
+          - pre-commit-hooks
+        args:
+          - --maxkb=1000
+
+      - id: debug-statements
+        name: Check Python debug statements
+        entry: debug-statement-hook
+        language: python
+        additional_dependencies:
+          - pre-commit-hooks
+        types:
+          - python
+
+      - id: ruff
+        name: Ruff lint and autofix
+        entry: python -m ruff check --fix
+        language: python
+        additional_dependencies:
+          - ruff
+        types:
+          - python
+
+      - id: nbstripout
+        name: Strip notebook output and local version metadata
+        entry: >-
+          python -m nbstripout
+          --extra-keys
+          metadata.language_info.version
+        language: python
+        additional_dependencies:
+          - nbstripout
+        files: \.ipynb$
+
+      - id: normalize-notebook-metadata
+        name: Normalize notebook kernel metadata
+        entry: python devtools/normalize_notebook_metadata.py
+        language: python
+        files: \.ipynb$

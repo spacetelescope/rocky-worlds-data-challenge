@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "rocky-worlds-data-challenge: Utilities for the Rocky Worlds DDT Data Challenge"
+type: software
+authors:
+  - family-names: Morris
+    given-names: Brett M.
+    email: bmmorris@stsci.edu
+  - family-names: Bell
+    given-names: Taylor J.
+    email: tbell@stsci.edu
+  - name: Space Telescope Science Institute
+repository-code: "https://github.com/spacetelescope/rocky-worlds-data-challenge"
+url: "https://rockyworlds.stsci.edu"
+license: BSD-3-Clause
+abstract: "Utilities and notebooks for preparing submissions to the Rocky Worlds DDT Data Challenge."

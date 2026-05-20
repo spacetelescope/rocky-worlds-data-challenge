@@ -1,0 +1,17 @@
+include README.rst
+include CHANGES.rst
+include LICENSE.rst
+include CITATION.cff
+
+include pyproject.toml
+include rocky_worlds_data_challenge/data/form.json
+recursive-include rocky_worlds_data_challenge/styles *.css
+
+recursive-include docs *
+
+prune build
+prune docs/_build
+prune docs/api
+prune .ipynb_checkpoints
+
+global-exclude *.pyc *.o

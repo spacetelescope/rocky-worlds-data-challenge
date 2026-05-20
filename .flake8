@@ -1,0 +1,10 @@
+[flake8]
+exclude =
+    .git,
+    .tox,
+    __pycache__,
+    build,
+    dist,
+    docs/_build,
+    rocky_worlds_data_challenge.egg-info,
+    rocky_worlds_data_challenge/version.py

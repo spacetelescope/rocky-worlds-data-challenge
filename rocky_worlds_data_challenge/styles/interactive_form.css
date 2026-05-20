@@ -1,0 +1,617 @@
+/* VS Code/Jupyter may render Solara's Vuetify widgets with either light or
+   dark theme classes. Keep the form readable in both modes instead of forcing
+   one theme onto all users. */
+.rwddt-form {
+  --rwddt-bg: #ffffff;
+  --rwddt-panel-bg: #ffffff;
+  --rwddt-input-bg: #ffffff;
+  --rwddt-text: #111111;
+  --rwddt-muted-text: #333333;
+  --rwddt-border: #d0d0d0;
+  --rwddt-tab-bg: #ADD8E6;
+  --rwddt-tab-text: #111111;
+  background: var(--rwddt-bg) !important;
+  color: var(--rwddt-text) !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.theme--dark .rwddt-form,
+.rwddt-form.theme--dark,
+.rwddt-form .theme--dark {
+  --rwddt-bg: #1e1e1e;
+  --rwddt-panel-bg: #242424;
+  --rwddt-input-bg: #2d2d2d;
+  --rwddt-text: #f5f5f5;
+  --rwddt-muted-text: #dddddd;
+  --rwddt-border: #666666;
+  --rwddt-tab-bg: #2F6F7E;
+  --rwddt-tab-text: #f5f5f5;
+}
+
+.theme--light .rwddt-form,
+.rwddt-form.theme--light,
+.rwddt-form .theme--light {
+  --rwddt-bg: #ffffff;
+  --rwddt-panel-bg: #ffffff;
+  --rwddt-input-bg: #ffffff;
+  --rwddt-text: #111111;
+  --rwddt-muted-text: #333333;
+  --rwddt-border: #d0d0d0;
+  --rwddt-tab-bg: #ADD8E6;
+  --rwddt-tab-text: #111111;
+}
+
+.rwddt-form--dark {
+  --rwddt-bg: #1e1e1e;
+  --rwddt-panel-bg: #242424;
+  --rwddt-input-bg: #2d2d2d;
+  --rwddt-text: #f5f5f5;
+  --rwddt-muted-text: #dddddd;
+  --rwddt-border: #666666;
+  --rwddt-tab-bg: #2F6F7E;
+  --rwddt-tab-text: #f5f5f5;
+}
+
+.rwddt-form--dark .theme--light,
+.rwddt-form--dark .theme--dark {
+  --rwddt-bg: #1e1e1e;
+  --rwddt-panel-bg: #242424;
+  --rwddt-input-bg: #2d2d2d;
+  --rwddt-text: #f5f5f5;
+  --rwddt-muted-text: #dddddd;
+  --rwddt-border: #666666;
+  --rwddt-tab-bg: #2F6F7E;
+  --rwddt-tab-text: #f5f5f5;
+}
+
+.rwddt-form--light {
+  --rwddt-bg: #ffffff;
+  --rwddt-panel-bg: #ffffff;
+  --rwddt-input-bg: #ffffff;
+  --rwddt-text: #111111;
+  --rwddt-muted-text: #333333;
+  --rwddt-border: #d0d0d0;
+  --rwddt-tab-bg: #ADD8E6;
+  --rwddt-tab-text: #111111;
+}
+
+.rwddt-form--light .theme--light,
+.rwddt-form--light .theme--dark {
+  --rwddt-bg: #ffffff;
+  --rwddt-panel-bg: #ffffff;
+  --rwddt-input-bg: #ffffff;
+  --rwddt-text: #111111;
+  --rwddt-muted-text: #333333;
+  --rwddt-border: #d0d0d0;
+  --rwddt-tab-bg: #ADD8E6;
+  --rwddt-tab-text: #111111;
+}
+
+@media (prefers-color-scheme: dark) {
+  .rwddt-form--auto,
+  .rwddt-form--auto .theme--light,
+  .rwddt-form--auto .theme--dark {
+    --rwddt-bg: #1e1e1e;
+    --rwddt-panel-bg: #242424;
+    --rwddt-input-bg: #2d2d2d;
+    --rwddt-text: #f5f5f5;
+    --rwddt-muted-text: #dddddd;
+    --rwddt-border: #666666;
+    --rwddt-tab-bg: #2F6F7E;
+    --rwddt-tab-text: #f5f5f5;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .rwddt-form--auto,
+  .rwddt-form--auto .theme--light,
+  .rwddt-form--auto .theme--dark {
+    --rwddt-bg: #ffffff;
+    --rwddt-panel-bg: #ffffff;
+    --rwddt-input-bg: #ffffff;
+    --rwddt-text: #111111;
+    --rwddt-muted-text: #333333;
+    --rwddt-border: #d0d0d0;
+    --rwddt-tab-bg: #ADD8E6;
+    --rwddt-tab-text: #111111;
+  }
+}
+
+/* JupyterLab exposes its active theme on the document body. Prefer that for
+   auto mode when available, since it can differ from the OS/browser theme. */
+body[data-jp-theme-light="false"] .rwddt-form--auto,
+body[data-jp-theme-light="false"] .rwddt-form--auto .theme--light,
+body[data-jp-theme-light="false"] .rwddt-form--auto .theme--dark {
+  --rwddt-bg: #1e1e1e;
+  --rwddt-panel-bg: #242424;
+  --rwddt-input-bg: #2d2d2d;
+  --rwddt-text: #f5f5f5;
+  --rwddt-muted-text: #dddddd;
+  --rwddt-border: #666666;
+  --rwddt-tab-bg: #2F6F7E;
+  --rwddt-tab-text: #f5f5f5;
+}
+
+body[data-jp-theme-light="true"] .rwddt-form--auto,
+body[data-jp-theme-light="true"] .rwddt-form--auto .theme--light,
+body[data-jp-theme-light="true"] .rwddt-form--auto .theme--dark {
+  --rwddt-bg: #ffffff;
+  --rwddt-panel-bg: #ffffff;
+  --rwddt-input-bg: #ffffff;
+  --rwddt-text: #111111;
+  --rwddt-muted-text: #333333;
+  --rwddt-border: #d0d0d0;
+  --rwddt-tab-bg: #ADD8E6;
+  --rwddt-tab-text: #111111;
+}
+
+.widget-subarea:has(.rwddt-form--light),
+.jupyter-widgets-view:has(.rwddt-form--light),
+.jp-OutputArea-output:has(.rwddt-form--light),
+.cell-output-ipywidget-background:has(.rwddt-form--light) {
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+.widget-subarea:has(.rwddt-form--dark),
+.jupyter-widgets-view:has(.rwddt-form--dark),
+.jp-OutputArea-output:has(.rwddt-form--dark),
+.cell-output-ipywidget-background:has(.rwddt-form--dark) {
+  background: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+@media (prefers-color-scheme: light) {
+  .widget-subarea:has(.rwddt-form--auto),
+  .jupyter-widgets-view:has(.rwddt-form--auto),
+  .jp-OutputArea-output:has(.rwddt-form--auto),
+  .cell-output-ipywidget-background:has(.rwddt-form--auto) {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .widget-subarea:has(.rwddt-form--auto),
+  .jupyter-widgets-view:has(.rwddt-form--auto),
+  .jp-OutputArea-output:has(.rwddt-form--auto),
+  .cell-output-ipywidget-background:has(.rwddt-form--auto) {
+    background: #1e1e1e !important;
+    color: #f5f5f5 !important;
+  }
+}
+
+body[data-jp-theme-light="true"] .widget-subarea:has(.rwddt-form--auto),
+body[data-jp-theme-light="true"] .jupyter-widgets-view:has(.rwddt-form--auto),
+body[data-jp-theme-light="true"] .jp-OutputArea-output:has(.rwddt-form--auto),
+body[data-jp-theme-light="true"] .cell-output-ipywidget-background:has(.rwddt-form--auto) {
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+body[data-jp-theme-light="false"] .widget-subarea:has(.rwddt-form--auto),
+body[data-jp-theme-light="false"] .jupyter-widgets-view:has(.rwddt-form--auto),
+body[data-jp-theme-light="false"] .jp-OutputArea-output:has(.rwddt-form--auto),
+body[data-jp-theme-light="false"] .cell-output-ipywidget-background:has(.rwddt-form--auto) {
+  background: #1e1e1e !important;
+  color: #f5f5f5 !important;
+}
+
+body:has(.rwddt-form--light) .v-menu__content,
+body:has(.rwddt-form--light) .v-menu__content .v-list {
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+body:has(.rwddt-form--light) .v-menu__content .v-list-item,
+body:has(.rwddt-form--light) .v-menu__content .v-list-item__title {
+  color: #111111 !important;
+}
+
+body:has(.rwddt-form--light) .v-menu__content .v-list-item--active,
+body:has(.rwddt-form--light) .v-menu__content .v-list-item:hover {
+  background: #e8f4f7 !important;
+}
+
+body:has(.rwddt-form--dark) .v-menu__content,
+body:has(.rwddt-form--dark) .v-menu__content .v-list {
+  background: #242424 !important;
+  color: #f5f5f5 !important;
+}
+
+body:has(.rwddt-form--dark) .v-menu__content .v-list-item,
+body:has(.rwddt-form--dark) .v-menu__content .v-list-item__title {
+  color: #f5f5f5 !important;
+}
+
+body:has(.rwddt-form--dark) .v-menu__content .v-list-item--active,
+body:has(.rwddt-form--dark) .v-menu__content .v-list-item:hover {
+  background: #2F6F7E !important;
+}
+
+@media (prefers-color-scheme: light) {
+  body:has(.rwddt-form--auto) .v-menu__content,
+  body:has(.rwddt-form--auto) .v-menu__content .v-list {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  body:has(.rwddt-form--auto) .v-menu__content .v-list-item,
+  body:has(.rwddt-form--auto) .v-menu__content .v-list-item__title {
+    color: #111111 !important;
+  }
+
+  body:has(.rwddt-form--auto) .v-menu__content .v-list-item--active,
+  body:has(.rwddt-form--auto) .v-menu__content .v-list-item:hover {
+    background: #e8f4f7 !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body:has(.rwddt-form--auto) .v-menu__content,
+  body:has(.rwddt-form--auto) .v-menu__content .v-list {
+    background: #242424 !important;
+    color: #f5f5f5 !important;
+  }
+
+  body:has(.rwddt-form--auto) .v-menu__content .v-list-item,
+  body:has(.rwddt-form--auto) .v-menu__content .v-list-item__title {
+    color: #f5f5f5 !important;
+  }
+
+  body:has(.rwddt-form--auto) .v-menu__content .v-list-item--active,
+  body:has(.rwddt-form--auto) .v-menu__content .v-list-item:hover {
+    background: #2F6F7E !important;
+  }
+}
+
+body[data-jp-theme-light="true"]:has(.rwddt-form--auto) .v-menu__content,
+body[data-jp-theme-light="true"]:has(.rwddt-form--auto) .v-menu__content .v-list {
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+body[data-jp-theme-light="true"]:has(.rwddt-form--auto) .v-menu__content .v-list-item,
+body[data-jp-theme-light="true"]:has(.rwddt-form--auto) .v-menu__content .v-list-item__title {
+  color: #111111 !important;
+}
+
+body[data-jp-theme-light="true"]:has(.rwddt-form--auto) .v-menu__content .v-list-item--active,
+body[data-jp-theme-light="true"]:has(.rwddt-form--auto) .v-menu__content .v-list-item:hover {
+  background: #e8f4f7 !important;
+}
+
+body[data-jp-theme-light="false"]:has(.rwddt-form--auto) .v-menu__content,
+body[data-jp-theme-light="false"]:has(.rwddt-form--auto) .v-menu__content .v-list {
+  background: #242424 !important;
+  color: #f5f5f5 !important;
+}
+
+body[data-jp-theme-light="false"]:has(.rwddt-form--auto) .v-menu__content .v-list-item,
+body[data-jp-theme-light="false"]:has(.rwddt-form--auto) .v-menu__content .v-list-item__title {
+  color: #f5f5f5 !important;
+}
+
+body[data-jp-theme-light="false"]:has(.rwddt-form--auto) .v-menu__content .v-list-item--active,
+body[data-jp-theme-light="false"]:has(.rwddt-form--auto) .v-menu__content .v-list-item:hover {
+  background: #2F6F7E !important;
+}
+
+.rwddt-form,
+.rwddt-form .v-application,
+.rwddt-form .v-application--wrap,
+.rwddt-form .v-main,
+.rwddt-form .v-card,
+.rwddt-form .v-sheet,
+.rwddt-form .v-window,
+.rwddt-form .v-window-item,
+.rwddt-form .v-tabs-items,
+.rwddt-form .v-tabs-items .v-card,
+.rwddt-form .v-tabs-items .v-sheet,
+.rwddt-form .v-tabs-items .container,
+.rwddt-form .v-tabs-items .row,
+.rwddt-form .v-tabs-items .col,
+.rwddt-form .theme--dark:not(.v-btn):not(.v-tab):not(.v-tabs),
+.rwddt-form .theme--light:not(.v-btn):not(.v-tab):not(.v-tabs) {
+  background: var(--rwddt-panel-bg) !important;
+  color: var(--rwddt-text) !important;
+  border-radius: 0 !important;
+}
+
+.rwddt-form .v-tabs,
+.rwddt-form .v-tabs-bar,
+.rwddt-form .v-slide-group__wrapper {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.rwddt-form .v-card,
+.rwddt-form .v-sheet,
+.rwddt-form .v-window,
+.rwddt-form .v-window-item,
+.rwddt-form .widget-html-content {
+  border-radius: 0 !important;
+  margin-top: 0 !important;
+}
+
+.rwddt-form h1,
+.rwddt-form h2,
+.rwddt-form h3,
+.rwddt-form p,
+.rwddt-form label,
+.rwddt-form .v-label,
+.rwddt-form .v-messages,
+.rwddt-form .v-input,
+.rwddt-form .v-text-field,
+.rwddt-form .v-select,
+.rwddt-form .v-select__selection,
+.rwddt-form .v-select__selection--comma,
+.rwddt-form .v-select__selections,
+.rwddt-form .v-list-item,
+.rwddt-form .v-list-item__title,
+.rwddt-form .v-list-item__subtitle,
+.rwddt-form .v-treeview-node__content,
+.rwddt-form .v-treeview-node__label,
+.rwddt-form .v-file-input,
+.rwddt-form .solara-file-browser,
+.rwddt-form .solara-file-browser *,
+.rwddt-form .widget-html-content,
+.rwddt-form .markdown-body {
+  color: var(--rwddt-text) !important;
+}
+
+.rwddt-form .v-input {
+  margin-top: 4px !important;
+  margin-bottom: 8px !important;
+  padding-top: 0 !important;
+}
+
+.rwddt-form p,
+.rwddt-form label,
+.rwddt-form .v-label,
+.rwddt-form .v-messages,
+.rwddt-form .markdown-body,
+.rwddt-form .widget-html-content {
+  font-size: 1.05rem !important;
+}
+
+.rwddt-form .theme--dark h1,
+.rwddt-form .theme--dark h2,
+.rwddt-form .theme--dark h3,
+.rwddt-form .theme--dark p,
+.rwddt-form .theme--dark label,
+.rwddt-form .theme--dark .v-label,
+.rwddt-form .theme--dark .v-messages,
+.rwddt-form .theme--dark .v-input,
+.rwddt-form .theme--dark .v-text-field,
+.rwddt-form .theme--dark .v-select,
+.rwddt-form .theme--dark .v-select__selection,
+.rwddt-form .theme--dark .v-select__selection--comma,
+.rwddt-form .theme--dark .v-select__selections,
+.rwddt-form .theme--dark .v-list-item,
+.rwddt-form .theme--dark .v-list-item__title,
+.rwddt-form .theme--dark .v-list-item__subtitle,
+.rwddt-form .theme--dark .v-treeview-node__content,
+.rwddt-form .theme--dark .v-treeview-node__label,
+.rwddt-form .theme--dark .v-file-input,
+.rwddt-form .theme--dark .solara-file-browser,
+.rwddt-form .theme--dark .solara-file-browser *,
+.rwddt-form .theme--dark .widget-html-content,
+.rwddt-form .theme--dark .markdown-body {
+  color: #f5f5f5 !important;
+}
+
+.rwddt-form.rwddt-form--light .theme--dark h1,
+.rwddt-form.rwddt-form--light .theme--dark h2,
+.rwddt-form.rwddt-form--light .theme--dark h3,
+.rwddt-form.rwddt-form--light .theme--dark p,
+.rwddt-form.rwddt-form--light .theme--dark label,
+.rwddt-form.rwddt-form--light .theme--dark .v-label,
+.rwddt-form.rwddt-form--light .theme--dark .v-messages,
+.rwddt-form.rwddt-form--light .theme--dark .v-input,
+.rwddt-form.rwddt-form--light .theme--dark .v-text-field,
+.rwddt-form.rwddt-form--light .theme--dark .v-select,
+.rwddt-form.rwddt-form--light .theme--dark .v-select__selection,
+.rwddt-form.rwddt-form--light .theme--dark .v-select__selection--comma,
+.rwddt-form.rwddt-form--light .theme--dark .v-select__selections,
+.rwddt-form.rwddt-form--light .theme--dark .v-list-item,
+.rwddt-form.rwddt-form--light .theme--dark .v-list-item__title,
+.rwddt-form.rwddt-form--light .theme--dark .v-list-item__subtitle,
+.rwddt-form.rwddt-form--light .theme--dark .v-treeview-node__content,
+.rwddt-form.rwddt-form--light .theme--dark .v-treeview-node__label,
+.rwddt-form.rwddt-form--light .theme--dark .v-file-input,
+.rwddt-form.rwddt-form--light .theme--dark .solara-file-browser,
+.rwddt-form.rwddt-form--light .theme--dark .solara-file-browser *,
+.rwddt-form.rwddt-form--light .theme--dark .widget-html-content,
+.rwddt-form.rwddt-form--light .theme--dark .markdown-body {
+  color: #111111 !important;
+}
+
+.rwddt-form .v-tabs,
+.rwddt-form .v-tabs-bar,
+.rwddt-form .v-slide-group__wrapper {
+  background: var(--rwddt-tab-bg) !important;
+  color: var(--rwddt-tab-text) !important;
+}
+
+.rwddt-form .v-tab {
+  color: var(--rwddt-tab-text) !important;
+}
+
+.rwddt-form .v-tab--active {
+  color: var(--rwddt-tab-text) !important;
+}
+
+.rwddt-form input,
+.rwddt-form textarea {
+  background: transparent !important;
+  color: var(--rwddt-text) !important;
+  caret-color: var(--rwddt-text) !important;
+  line-height: 1.4 !important;
+}
+
+.rwddt-form textarea {
+  padding-top: 10px !important;
+}
+
+.rwddt-form input {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.rwddt-form input::placeholder,
+.rwddt-form textarea::placeholder {
+  color: var(--rwddt-muted-text) !important;
+  opacity: 0.75 !important;
+}
+
+.rwddt-form--light .solara-file-browser ::selection {
+  background: #c7d8ff !important;
+  color: #111111 !important;
+}
+
+.rwddt-form--dark .solara-file-browser ::selection,
+.rwddt-form--auto .solara-file-browser ::selection {
+  background: #4b6272 !important;
+  color: #ffffff !important;
+}
+
+.rwddt-form .v-input__slot,
+.rwddt-form .v-text-field__slot,
+.rwddt-form .v-select__slot {
+  background: transparent !important;
+  color: var(--rwddt-text) !important;
+}
+
+.rwddt-form .v-input__control {
+  background: transparent !important;
+}
+
+.rwddt-form .v-input__slot::before,
+.rwddt-form .v-input__slot::after,
+.rwddt-form .v-text-field__slot::before,
+.rwddt-form .v-text-field__slot::after,
+.rwddt-form .v-select__slot::before,
+.rwddt-form .v-select__slot::after {
+  border-color: var(--rwddt-border) !important;
+}
+
+.rwddt-form .v-text-field fieldset {
+  border-color: var(--rwddt-border) !important;
+}
+
+.rwddt-form .rwddt-select {
+  max-width: 360px !important;
+  margin-bottom: 0 !important;
+}
+
+.rwddt-form .v-btn {
+  color: #ffffff !important;
+}
+
+.rwddt-form .v-btn:not(.v-tab) {
+  background-color: #D16200 !important;
+  color: #ffffff !important;
+}
+
+.rwddt-validation-message {
+  color: var(--rwddt-text) !important;
+  font-size: 1.05rem !important;
+}
+
+.rwddt-loading-panel {
+  min-height: 240px !important;
+  padding: 48px 24px !important;
+  background: var(--rwddt-panel-bg) !important;
+  color: var(--rwddt-text) !important;
+}
+
+.rwddt-loaded-path,
+.rwddt-question-details {
+  color: var(--rwddt-text) !important;
+  font-size: 0.86rem !important;
+  line-height: 1.35 !important;
+  margin-bottom: -4px !important;
+}
+
+.rwddt-prior-hint {
+  color: var(--rwddt-muted-text) !important;
+  font-size: 0.82rem !important;
+  line-height: 1.35 !important;
+  margin-top: 4px !important;
+}
+
+.rwddt-helper-line + .rwddt-helper-line {
+  margin-top: 0.25em !important;
+}
+
+.rwddt-helper-label {
+  font-weight: 700 !important;
+}
+
+.rwddt-question-prompt {
+  color: var(--rwddt-text) !important;
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  margin: 32px 0 -4px !important;
+}
+
+.rwddt-form-footer-note {
+  color: var(--rwddt-text) !important;
+  font-size: 1.2rem !important;
+  line-height: 1.4 !important;
+  margin: 36px 0 8px !important;
+  padding: 12px 16px !important;
+  border-left: 4px solid var(--rwddt-tab-bg) !important;
+  background: var(--rwddt-input-bg) !important;
+}
+
+.rwddt-required {
+  color: #ff2f2f !important;
+  font-weight: 700 !important;
+}
+
+.rwddt-form code,
+.rwddt-form .markdown-body code,
+.rwddt-form .widget-html-content code {
+  display: inline !important;
+  min-width: 0 !important;
+  padding: 0 0.08rem !important;
+  padding-left: 0.08rem !important;
+  padding-right: 0.08rem !important;
+  margin: 0 !important;
+  border-radius: 0.15rem !important;
+  box-shadow: none !important;
+}
+
+.rwddt-form code::before,
+.rwddt-form code::after,
+.rwddt-form .markdown-body code::before,
+.rwddt-form .markdown-body code::after,
+.rwddt-form .widget-html-content code::before,
+.rwddt-form .widget-html-content code::after {
+  content: none !important;
+}
+
+.rwddt-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 24px !important;
+  padding: 8px 0 !important;
+  background: var(--rwddt-panel-bg) !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+}
+
+.rwddt-header h1 {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+.rwddt-header img {
+  display: block !important;
+}
